@@ -28,15 +28,15 @@ describe('Central de atendimento ao Cliente TAT', () => {
 
     it("campo telefone continua vazio quando preenchido com um valor não numérico", () => {
       cy.get("#phone")
-      .type("aabbcc")
-      .should("have.value", "")
+        .type("aabbcc")
+        .should("have.value", "")
     })
 
     it("exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário", () => {
       cy.get("#firstName").type("Francisco")
       cy.get("#lastName").type("Santos")
       cy.get("#email").type("francisco@example.com")
-      cy.get("#phone-checkbox").click()
+      cy.get("#phone-checkbox").check()
       cy.get("#open-text-area").type("O Samuel e o Vitor, são ótimos amigos para se contar!!", { delay: 0 })
       cy.contains("button", "Enviar").click()
       
@@ -45,28 +45,28 @@ describe('Central de atendimento ao Cliente TAT', () => {
 
     it("preenche e limpa os campos nome, sobrenome, email e telefone", () => {
       cy.get("#firstName")
-      .type("Francisco")
-      .should("have.value", "Francisco" )
-      .clear()
-      .should("have.value", "")
+        .type("Francisco")
+        .should("have.value", "Francisco" )
+        .clear()
+        .should("have.value", "")
       
       cy.get("#lastName")
-      .type("Santos")
-      .should("have.value", "Santos" )
-      .clear()
-      .should("have.value", "")
+        .type("Santos")
+        .should("have.value", "Santos" )
+        .clear()
+        .should("have.value", "")
 
       cy.get("#email")
-      .type("francisc@oexample.com")
-      .should("have.value", "francisc@oexample.com" )
-      .clear()
-      .should("have.value", "")
+        .type("francisc@oexample.com")
+        .should("have.value", "francisc@oexample.com" )
+        .clear()
+        .should("have.value", "")
 
       cy.get("#phone")
-      .type("88999999999")
-      .should("have.value", "88999999999" )
-      .clear()
-      .should("have.value", "")
+        .type("88999999999")
+        .should("have.value", "88999999999" )
+        .clear()
+        .should("have.value", "")
 
     });
 
@@ -91,32 +91,32 @@ describe('Central de atendimento ao Cliente TAT', () => {
 
     it("seleciona um produto (Youtube) por seu texto", () => {
       cy.get("select")
-      .select("YouTube")
-      .should("have.value", "youtube")
+        .select("YouTube")
+        .should("have.value", "youtube")
 
     });
 
     it("seleciona um produto (Mentoria) por seu valor (value)", () => {
       cy.get("select")
-      .select("mentoria")
-      .should("have.value", "mentoria")
+        .select("mentoria")
+        .should("have.value", "mentoria")
 
     });
 
     it("seleciona um produto (Blog) por seu índice", () => {
       cy.get("select")
-       .select(1)
-       .should("have.value", "blog")
+        .select(1)
+        .should("have.value", "blog")
     });
 
     it("marca o tipo de atendimento 'Feedback'", () => {
       cy.get("input[type='radio'][value='feedback']")
-      .check()
-      .should("be.checked")
+        .check()
+        .should("be.checked")
     });
 
     
-    it.only("marca cada tipo de atendimento", () => {
+    it("marca cada tipo de atendimento", () => {
       cy.get("input[type='radio']")
         .each(tipoDeAtendimento => { // Utilizando o .each e cy.wrap para agrupar o tipo de atendimento
           cy.wrap(tipoDeAtendimento)
@@ -134,5 +134,39 @@ describe('Central de atendimento ao Cliente TAT', () => {
       // cy.get("input[type='radio'][value='feedback']")
       // .check()
       // .should("be.checked")
+    });
+
+    it("marca ambos checkboxes, depois desmarca o último", () => {
+      cy.get("input[type='checkbox']")
+        .check()
+        .should("be.checked")
+        .last()
+        .uncheck()
+        .should("not.be.checked")
+    });
+
+    it("seleciona um arquivo da pasta fixtures", () => {
+      cy.get('#file-upload')
+        .selectFile("cypress/fixtures/example.json")
+        .should(input => {
+          expect(input[0].files[0].name).to.equal("example.json")
+      });
+    });
+
+    it("seleciona um arquivo simulando um drag-and-drop", () => {
+      cy.get('#file-upload')
+        .selectFile("cypress/fixtures/example.json", { action: "drag-drop" })
+        .should(input => {
+          expect(input[0].files[0].name).to.equal("example.json")
+      });
+    });
+
+    it("seleciona um arquivo utilizando uma fixture para a qual foi dada um alias", () => {
+      cy.fixture("example.json").as("arquivoExemplo")
+      cy.get('#file-upload')
+        .selectFile("@arquivoExemplo")
+        .should(input => {
+          expect(input[0].files[0].name).to.equal("example.json")
+      });
     });
 });
