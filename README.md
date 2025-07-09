@@ -1,28 +1,30 @@
-# 🌲 Cypress, do Zero à Nuvem ☁️
+# Cypress, do Zero a nuvem
 
-👋 Seja bem-vindo(a)!
+Um projeto exemplo do curso "Cypress, do Zero a nuvem" da escola Talking About Testing.
 
-É muito bom tê-lo(a) aqui. Tenho certeza que você vai amar esse curso. ❤️
+## Pre-requerimento
 
-## O que você vai aprender?
+É requisito que você tenha o git, Node.js e npm instalado.
 
-- Como configurar um projeto Cypress do zero
-- Como visitar páginas locais e remotas
-- Como lidar com os elementos mais comuns encontrados em aplicações web
-- Como testar upload de arquivos
-- Como realizar as mais diversas verificações de resultados esperados
-- Como criar comandos customizados
-- Como lidar com links que abrem em outra aba do navegador
-- Como rodar testes simulando as dimensões de um dispositivo móvel
-- Como resolver os mesmos problemas de diferentes formas, conhecendo a [API do Cypress](https://docs.cypress.io/api/table-of-contents)
-- Como criar uma documentação mínima para seu projeto de testes automatizados
-- Como executar os testes em um _workflow_ de integração contínua sempre que mudanças ocorrerem no código da aplicação (ou dos testes)
-- Como integrar seu _workflow_ de integração contínua com o Cypress Cloud (o serviço de gestão de testes do Cypress na nuvem)
 
-## Vamos começar?
+> Usei as versões `2, 42, 1`, `v20.13.1` e `10.8.1` do Git, Node.js e npm, respectivamente. Sugiro que você use a mesma versão ou versões posteriores do TS.
 
-Vá para a seção [estrutura do curso](./lessons/_course-structure_.md).
+## Instalação
 
-___
+Rodar `npm install` (ou `npm i` para a versão curta) para instalar as dependências de desenvolvimento
 
-Este é um curso da **Escola Talking About Testing**.
+## Testes
+Neste projeto, você pode executar testes em um desktop ou mobile viewport
+
+### Desktop
+Rodar `npm test` (ou `npm t` para a versão curta) para rodar em modo headless no desktop viewport
+
+Ou, rodar `npm run cy:open` para abrir no viewport Cypress com a cypress App
+
+### Mobile
+
+Rodar `npm run test:mobile` (ou `npm t` para a versão curta) para rodar em modo headless no mobile viewport
+
+Ou, rodar `npm run cy:open:mobile` para abrir no viewport Cypress com a cypress App
+
+Esse projeto foi criado por [Walmir](http://walmyr.dev).
